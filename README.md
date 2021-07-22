@@ -18,7 +18,7 @@ Could be a workaround for HTTP clients that don't use or leverage keepalives eff
 # Build and run
 `docker build -t dynamic-proxy . && docker run -p 8080:80 -p 8443:443 dynamic-proxy`
 
-# simple 
+# Plain Text HTTP Example 
 client -- plaintext http -- proxy -- https -- intended site
 
 ```
@@ -33,7 +33,7 @@ Access-Control-Allow-Origin: *
 Access-Control-Allow-Credentials: true
 ```
 
-# secure
+# Self-signed HTTPS using HTTP2 and TLSv1.3
 client -- https -- proxy -- https -- intended site
 ensure your client trusts certs/one-cert.crt
 
@@ -48,19 +48,19 @@ access-control-allow-origin: *
 access-control-allow-credentials: true
 ```
 
-# adding more domains for secure mode
+# Adding more domains to the self signed certificate
 Just add the domains to the bottom of certs/openssl.cnf
 then run ./run-openssl.sh
 and rebuild the container
 
-# more ideas on how to proxy generically for SSL
+# More ideas on how to proxy generically for SSL
 1. Replace dots with _ (underscores) in the client and prefix to a wildcard DNS domain which you have a real certificate for e.g. *.dynamic-proxy.com
 e.g. httpbin_org.dynamic-proxy.com
 Just have a *.dynamic-proxy.com cert on the box. Or a domain with a REAL trusted certificate from a real CA!!!
 Then in nginx capture the bit with underscores, replace the underscores with dots and use that as the host header and sni for the backend connection
 Have a wildcard dns record that takes *.dynamic-proxy.com to the dynamic-alive proxy container (probably 127.0.0.1)
 
-# more ideas
+# Even more ideas
 1. You could probably pass in the upstream server port and SSL/TLS requirement as headers you can capture in lua.
 
 # Links and thanks
