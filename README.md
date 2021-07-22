@@ -1,5 +1,9 @@
 # dynamic-proxy
 Throw a host header at it and it will proxy to it!
+No need to hardcode domains and upstreams in the configuration.
+Dynamically builds balancers and connection pools from the incoming host header.
+Could be a workaround for HTTP clients that don't use or leverage keepalives effectively, don't retry and/or don't load balance across all IPs in a DNS record.
+
 * Implements retries, keepalives (idle/persistent connection pooling) and load balancing when your client can't!
 * Optimised nginx Openresty config for speed and high traffic. https://github.com/openresty/docker-openresty
 * Dynamic connection pooling to any domain using lookups performed by Kong lua-resty-dns-client https://github.com/Kong/lua-resty-dns-client
