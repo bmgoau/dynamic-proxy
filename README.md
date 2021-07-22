@@ -3,11 +3,11 @@ Throw a host header at it and it will proxy to it!
 * Implements retries, keepalives (idle/persistent connection pooling) and load balancing when your client can't!
 * Optimised nginx Openresty config for speed and high traffic. https://github.com/openresty/docker-openresty
 * Dynamic connection pooling to any domain using lookups performed by Kong lua-resty-dns-client https://github.com/Kong/lua-resty-dns-client
-** resolves A, AAAA, CNAME and SRV records, including port
-** parses /etc/hosts
-** parses /resolv.conf and applies LOCALDOMAIN and RES_OPTIONS variables
-** caches dns query results in memory
-** synchronizes requests (a single request for many requestors, eg. when cached ttl expires under heavy load)
+    * resolves A, AAAA, CNAME and SRV records, including port
+    * parses /etc/hosts
+    * parses /resolv.conf and applies LOCALDOMAIN and RES_OPTIONS variables
+    * caches dns query results in memory
+    * synchronizes requests (a single request for many requestors, eg. when cached ttl expires under heavy load)
 * Supports self-signed SSL using iteration on the-one-cert https://github.com/flotwig/the-one-cert
 * Above point allows ALPN, HTTP2 and TLS1.3 from local box or wherever you trust the certificate.
 
